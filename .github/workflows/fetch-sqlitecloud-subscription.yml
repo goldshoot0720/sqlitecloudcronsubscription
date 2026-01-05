@@ -3,7 +3,7 @@ name: Fetch SQLiteCloud Subscription Table
 on:
   workflow_dispatch:
   schedule:
-    - cron: "5 */5 * * *"  # 每5小時25分鐘
+    - cron: "6 */6 * * *"  # 每6小時6分鐘
 
 jobs:
   fetch-Subscription:
