@@ -1,0 +1,36 @@
+name: Fetch SQLiteCloud Subscription Table
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "5 */5 * * *"  # 每5小時25分鐘
+
+jobs:
+  fetch-Subscription:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js 24
+        uses: actions/setup-node@v3
+        with:
+          node-version: '24'
+
+      - name: Install Dependencies
+        run: npm install @sqlitecloud/drivers
+
+      - name: Query SQLiteCloud Subscription table
+        env:
+          SQLITECLOUD_URL: ${{ secrets.SQLITECLOUD_URL }}
+        run: node fetch-Subscription.js
+
+      - name: Upload Result
+        uses: actions/upload-artifact@v6
+        with:
+          name: Subscription-json
+          path: Subscription.json
+
+      - name: Print Subscription.json
+        run: cat Subscription.json
