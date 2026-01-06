@@ -1,12 +1,12 @@
-name: Fetch SQLiteCloud Subscription Table
+name: Fetch SQLiteCloud Scription Table
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "6 */6 * * *"  # 每6小時6分鐘
+    - cron: "5 */5 * * *"  # 每5小時5分鐘
 
 jobs:
-  fetch-Subscription:
+  fetch-food:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,16 +21,16 @@ jobs:
       - name: Install Dependencies
         run: npm install @sqlitecloud/drivers
 
-      - name: Query SQLiteCloud Subscription table
+      - name: Query SQLiteCloud scription table
         env:
           SQLITECLOUD_URL: ${{ secrets.SQLITECLOUD_URL }}
-        run: node fetch-Subscription.js
+        run: node fetch-scription.js
 
       - name: Upload Result
         uses: actions/upload-artifact@v6
         with:
-          name: Subscription-json
-          path: Subscription.json
+          name: scription-json
+          path: scription.json
 
-      - name: Print Subscription.json
-        run: cat Subscription.json
+      - name: Print scription.json
+        run: cat scription.json
